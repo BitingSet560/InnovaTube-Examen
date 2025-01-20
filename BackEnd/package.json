@@ -1,0 +1,11 @@
+{
+  "name": "backendinnovatube",
+  "version": "1.0.0",
+  "description": "Backend para examen tecnico InnovaTube",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "author": "Angel Eduardo Hernández López",
+  "license": "ISC"
+}
