@@ -1,0 +1,28 @@
+# Archivos generales
+.DS_Store
+Thumbs.db
+*.log
+
+# Dependencias de Node.js
+node_modules/
+
+# Archivos de entorno
+*.env
+
+# Salidas de construcción
+dist/
+build/
+
+# Configuración del editor de texto
+.idea/
+.vscode/
+*.swp
+
+# Logs y depuración
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Otros
+*.bak
+*.tmp
