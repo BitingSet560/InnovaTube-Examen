@@ -1,16 +1,10 @@
 const express = require('express');
-const routes = require('./routes'); // Importar las rutas
+const connectDB = require('./src/config/database');
+require('dotenv').config();
 
-const app = express();
-const port = 3000;
+const app = require('./src/app');
 
-app.use('/api', routes);
+connectDB();
 
-app.get('/', (req, res) => {
-  res.send('Servidor conectado a MongoDB');
-}); 
-
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
