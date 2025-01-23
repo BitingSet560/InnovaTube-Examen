@@ -9,8 +9,10 @@ const createUser = async (userData) => {
     return await user.save();
   };
   
-  module.exports = { createUser };
-
+const findUserByEmail = async (email) => {
+  return await User.findOne({ email });
+};
 module.exports = {
-    createUser
+    createUser,
+    findUserByEmail
 }

@@ -4,4 +4,35 @@ const register = async (userData) => {
   return await userRepository.createUser(userData);
 };
 
-module.exports = { register };
+const login = async (credentials) => {
+  const { email, contrasenia } = credentials;
+  console.log(email, contrasenia)
+  if (!email || !contrasenia) {
+    throw new Error('Todos los campos son obligatorios');
+  }
+
+  const user = await userRepository.findUserByEmail(email);
+
+  if (!user) {
+    throw new Error('Usuario no encontrado');
+  }
+
+  if (user.contrasenia !== contrasenia) {
+    throw new Error('Credenciales inválidas');
+  }
+
+  return {
+    message: 'Inicio de sesión exitoso',
+    user: {
+      id: user._id,
+      nombre: user.nombre,
+      email: user.email,
+    },
+  };
+};
+
+
+module.exports = { 
+  register,
+  login
+ };

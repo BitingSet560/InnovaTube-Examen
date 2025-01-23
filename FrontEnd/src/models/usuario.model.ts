@@ -1,8 +1,8 @@
-export interface usuario  {
-    id : number;
+export interface Usuario  {
+    id? : number;
     nombre: string;
     apellido: string;
     email: string;
-    password: string;
-    token: string;    
+    contrasenia: string;
+    token?: string;    
 }

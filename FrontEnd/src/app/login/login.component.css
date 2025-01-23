@@ -1,0 +1,21 @@
+/* styles.css */
+.spacer {
+    flex: 1 1 auto;
+  }
+  
+  mat-card {
+    margin: 20px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  
+  mat-list-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  mat-list-avatar {
+    margin-right: 20px;
+  }
