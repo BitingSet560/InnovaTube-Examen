@@ -1,5 +1,6 @@
 const express = require('express');
 const { registerUser, loginUser  } = require('../controllers/user.controller');
+const { verifyRecaptcha } = require('../middleware/recaptcha.middleware');
 const router = express.Router();
 
 router.use(function(req, res, next) {
@@ -9,7 +10,7 @@ router.use(function(req, res, next) {
   });
 
 //RUTAS DE ENPOINTS
-router.post('/register', registerUser);
+router.post('/register', verifyRecaptcha, registerUser);
 
 router.post('/login', loginUser); // Nueva ruta para login
 
