@@ -6,7 +6,6 @@ const register = async (userData) => {
 
 const login = async (credentials) => {
   const { email, contrasenia } = credentials;
-  console.log(email, contrasenia)
   if (!email || !contrasenia) {
     throw new Error('Todos los campos son obligatorios');
   }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../services/auth.service';
 import { Usuario } from '../../models/usuario.model';
 import { MatCardModule } from '@angular/material/card';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -25,31 +26,39 @@ import { MatCardModule } from '@angular/material/card';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
-export class SignUpComponent {
+export class SignUpComponent{
   signUpForm: FormGroup;
+  siteKey = '6LcjVcEqAAAAAGwFv-bnL4IBigOqbUWXm5dI-jWM'; // Reemplaza con tu clave de sitio
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private http: HttpClient) {
     this.signUpForm = this.fb.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required]
+      contrasenia: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.signUpForm.valid) {
-      const usuario: Usuario = {
-        nombre: this.signUpForm.value.nombre,
-        apellido: this.signUpForm.value.apellido,
-        email: this.signUpForm.value.email,
-        contrasenia: this.signUpForm.value.password
+      // Obtener el token de reCAPTCHA
+      const recaptchaToken = await window.grecaptcha.execute(this.siteKey, { action: 'signUp' });
+
+      // Datos del formulario más el token de reCAPTCHA
+      const formData = {
+        ...this.signUpForm.value,
+        recaptchaToken,
       };
-      console.log(usuario)
-      this.authService.register(usuario).subscribe(response => {
-        
-        console.log('User registered successfully', response);
+
+      // Enviar datos al backend
+      this.http.post('http://localhost:3000/api/auth/register', formData).subscribe({
+        next: (response) => {
+          console.log('Usuario registrado:', response);
+        },
+        error: (err) => {
+          console.error('Error al registrar usuario:', err);
+        },
       });
     }
   }

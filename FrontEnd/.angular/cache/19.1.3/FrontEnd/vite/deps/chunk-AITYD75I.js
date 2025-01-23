@@ -1,6 +1,6 @@
 import {
   isPlatformBrowser
-} from "./chunk-SQEFUJB3.js";
+} from "./chunk-U47L6UPD.js";
 import {
   ApplicationRef,
   ChangeDetectionStrategy,
@@ -11,6 +11,7 @@ import {
   Injector,
   NgModule,
   PLATFORM_ID,
+  VERSION,
   ViewEncapsulation,
   createComponent,
   inject,
@@ -19,7 +20,7 @@ import {
   ɵɵdefineInjectable,
   ɵɵdefineInjector,
   ɵɵdefineNgModule
-} from "./chunk-7I27JHVS.js";
+} from "./chunk-GYRBSM7H.js";
 
 // node_modules/@angular/cdk/fesm2022/platform.mjs
 var hasV8BreakIterator;
@@ -162,6 +163,55 @@ var RtlScrollAxisType;
   RtlScrollAxisType2[RtlScrollAxisType2["NEGATED"] = 1] = "NEGATED";
   RtlScrollAxisType2[RtlScrollAxisType2["INVERTED"] = 2] = "INVERTED";
 })(RtlScrollAxisType || (RtlScrollAxisType = {}));
+var rtlScrollAxisType;
+var scrollBehaviorSupported;
+function supportsScrollBehavior() {
+  if (scrollBehaviorSupported == null) {
+    if (typeof document !== "object" || !document || typeof Element !== "function" || !Element) {
+      scrollBehaviorSupported = false;
+      return scrollBehaviorSupported;
+    }
+    if ("scrollBehavior" in document.documentElement.style) {
+      scrollBehaviorSupported = true;
+    } else {
+      const scrollToFunction = Element.prototype.scrollTo;
+      if (scrollToFunction) {
+        scrollBehaviorSupported = !/\{\s*\[native code\]\s*\}/.test(scrollToFunction.toString());
+      } else {
+        scrollBehaviorSupported = false;
+      }
+    }
+  }
+  return scrollBehaviorSupported;
+}
+function getRtlScrollAxisType() {
+  if (typeof document !== "object" || !document) {
+    return RtlScrollAxisType.NORMAL;
+  }
+  if (rtlScrollAxisType == null) {
+    const scrollContainer = document.createElement("div");
+    const containerStyle = scrollContainer.style;
+    scrollContainer.dir = "rtl";
+    containerStyle.width = "1px";
+    containerStyle.overflow = "auto";
+    containerStyle.visibility = "hidden";
+    containerStyle.pointerEvents = "none";
+    containerStyle.position = "absolute";
+    const content = document.createElement("div");
+    const contentStyle = content.style;
+    contentStyle.width = "2px";
+    contentStyle.height = "1px";
+    scrollContainer.appendChild(content);
+    document.body.appendChild(scrollContainer);
+    rtlScrollAxisType = RtlScrollAxisType.NORMAL;
+    if (scrollContainer.scrollLeft === 0) {
+      scrollContainer.scrollLeft = 1;
+      rtlScrollAxisType = scrollContainer.scrollLeft === 0 ? RtlScrollAxisType.NEGATED : RtlScrollAxisType.INVERTED;
+    }
+    scrollContainer.remove();
+  }
+  return rtlScrollAxisType;
+}
 var shadowDomIsSupported;
 function _supportsShadowDom() {
   if (shadowDomIsSupported == null) {
@@ -193,6 +243,26 @@ function _getFocusedElementPierceShadowDom() {
 }
 function _getEventTarget(event) {
   return event.composedPath ? event.composedPath()[0] : event.target;
+}
+function _isTestEnvironment() {
+  return (
+    // @ts-ignore
+    typeof __karma__ !== "undefined" && !!__karma__ || // @ts-ignore
+    typeof jasmine !== "undefined" && !!jasmine || // @ts-ignore
+    typeof jest !== "undefined" && !!jest || // @ts-ignore
+    typeof Mocha !== "undefined" && !!Mocha
+  );
+}
+function _bindEventWithOptions(renderer, target, eventName, callback, options) {
+  const major = parseInt(VERSION.major);
+  const minor = parseInt(VERSION.minor);
+  if (major > 19 || major === 19 && minor > 0 || major === 0 && minor === 0) {
+    return renderer.listen(target, eventName, callback, options);
+  }
+  target.addEventListener(eventName, callback, options);
+  return () => {
+    target.removeEventListener(eventName, callback, options);
+  };
 }
 
 // node_modules/@angular/cdk/fesm2022/private.mjs
@@ -289,6 +359,12 @@ function _isNumberValue(value) {
 function coerceArray(value) {
   return Array.isArray(value) ? value : [value];
 }
+function coerceCssPixelValue(value) {
+  if (value == null) {
+    return "";
+  }
+  return typeof value === "string" ? value : `${value}px`;
+}
 function coerceElement(elementOrRef) {
   return elementOrRef instanceof ElementRef ? elementOrRef.nativeElement : elementOrRef;
 }
@@ -297,14 +373,20 @@ export {
   Platform,
   getSupportedInputTypes,
   normalizePassiveListenerOptions,
+  RtlScrollAxisType,
+  supportsScrollBehavior,
+  getRtlScrollAxisType,
   _getShadowRoot,
   _getFocusedElementPierceShadowDom,
   _getEventTarget,
+  _isTestEnvironment,
+  _bindEventWithOptions,
   _CdkPrivateStyleLoader,
   _VisuallyHiddenLoader,
   coerceBooleanProperty,
   coerceNumberProperty,
   coerceArray,
+  coerceCssPixelValue,
   coerceElement
 };
-//# sourceMappingURL=chunk-ELOMOUWI.js.map
+//# sourceMappingURL=chunk-AITYD75I.js.map
