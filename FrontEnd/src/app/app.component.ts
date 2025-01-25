@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-
-
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +11,24 @@ import { MatButtonModule } from '@angular/material/button';
     RouterLink, 
     RouterLinkActive,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    CommonModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'InnovaTube';
+
+export class AppComponent implements OnInit {
+  showWelcomeCard = true;
+
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const token = localStorage.getItem('authToken');
+        this.showWelcomeCard = !token;
+      }
+    });
+  }
 }

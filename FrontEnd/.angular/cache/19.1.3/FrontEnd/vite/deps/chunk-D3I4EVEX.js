@@ -1,23 +1,22 @@
 import {
+  BidiModule,
+  Directionality
+} from "./chunk-LBKB5J5N.js";
+import {
   Platform,
   RtlScrollAxisType,
   coerceElement,
   coerceNumberProperty,
   getRtlScrollAxisType,
   supportsScrollBehavior
-} from "./chunk-AITYD75I.js";
-import {
-  BidiModule,
-  Directionality
-} from "./chunk-4ZHE5OOE.js";
+} from "./chunk-G5BCW34B.js";
 import {
   DOCUMENT
-} from "./chunk-U47L6UPD.js";
+} from "./chunk-MMEX5KFV.js";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ConnectableObservable,
   Directive,
   ElementRef,
   EventEmitter,
@@ -30,13 +29,10 @@ import {
   NgModule,
   NgModuleRef$1,
   NgZone,
-  Observable,
   Optional,
   Output,
   Renderer2,
   RendererFactory2,
-  Subject,
-  Subscription,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
@@ -44,21 +40,12 @@ import {
   afterNextRender,
   animationFrameScheduler,
   asapScheduler,
-  auditTime,
   booleanAttribute,
   createComponent,
-  distinctUntilChanged,
-  filter,
   forwardRef,
   inject,
   isObservable,
-  of,
-  pairwise,
   setClassMetadata,
-  shareReplay,
-  startWith,
-  switchMap,
-  takeUntil,
   ɵɵInheritDefinitionFeature,
   ɵɵInputTransformsFeature,
   ɵɵNgOnChangesFeature,
@@ -80,7 +67,22 @@ import {
   ɵɵqueryRefresh,
   ɵɵstyleProp,
   ɵɵviewQuery
-} from "./chunk-GYRBSM7H.js";
+} from "./chunk-J6IWT6UX.js";
+import {
+  ConnectableObservable,
+  Observable,
+  Subject,
+  Subscription,
+  auditTime,
+  distinctUntilChanged,
+  filter,
+  of,
+  pairwise,
+  shareReplay,
+  startWith,
+  switchMap,
+  takeUntil
+} from "./chunk-RLMOG32X.js";
 
 // node_modules/@angular/cdk/fesm2022/portal.mjs
 function throwNullPortalError() {
@@ -2279,4 +2281,4 @@ export {
   ViewportRuler,
   ScrollingModule
 };
-//# sourceMappingURL=chunk-ZSUMED4Z.js.map
+//# sourceMappingURL=chunk-D3I4EVEX.js.map

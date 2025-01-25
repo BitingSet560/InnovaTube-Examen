@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VideoService } from '../services/video.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-videos',
@@ -28,15 +29,25 @@ import { Router } from '@angular/router';
   templateUrl: './videos.component.html',
   styleUrl: './videos.component.css'
 })
-export class VideosComponent {
-  username = 'Usuario'; // Cambia esto por el nombre del usuario autenticado
+export class VideosComponent implements OnInit {
+  username: string = '';
   searchQuery = '';
   videos: any[] = [];
-  favoriteVideos: any[] = []; // Lista de favoritos
+  favoriteVideos: any[] = [];
   isLoading = false;
 
-  constructor(private videoService: VideoService, private snackBar: MatSnackBar, private router: Router) {}
+  constructor(
+    private videoService: VideoService,
+    private snackBar: MatSnackBar,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
+  ngOnInit() {
+    const storedUsername = localStorage.getItem('username');
+    this.username = storedUsername ? storedUsername : 'Usuario';
+  }
+  
   searchVideos() {
     this.isLoading = true;
     this.videoService.searchVideos(this.searchQuery).subscribe({
@@ -67,7 +78,12 @@ export class VideosComponent {
     }
   }
 
+  playVideo(video: any) {
+    window.open(`https://www.youtube.com/watch?v=${video.videoId}`, '_blank');
+  }
+
   logout() {
-    this.router.navigate(['/login'])
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

@@ -1,0 +1,31 @@
+.spacer {
+    flex: 1 1 auto;
+  }
+  
+  .youtube-search-container {
+    padding: 16px;
+  }
+  
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    margin: 16px 0;
+  }
+  
+  .video-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .loading {
+    text-align: center;
+    margin: 16px 0;
+  }
+  
+  .no-results {
+    text-align: center;
+    color: #777;
+  }
+  

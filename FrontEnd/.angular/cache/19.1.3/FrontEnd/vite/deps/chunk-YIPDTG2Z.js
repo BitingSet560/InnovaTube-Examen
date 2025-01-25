@@ -1,4 +1,7 @@
 import {
+  BidiModule
+} from "./chunk-LBKB5J5N.js";
+import {
   Platform,
   _CdkPrivateStyleLoader,
   _VisuallyHiddenLoader,
@@ -9,17 +12,13 @@ import {
   coerceElement,
   coerceNumberProperty,
   normalizePassiveListenerOptions
-} from "./chunk-AITYD75I.js";
-import {
-  BidiModule
-} from "./chunk-4ZHE5OOE.js";
+} from "./chunk-G5BCW34B.js";
 import {
   DOCUMENT
-} from "./chunk-U47L6UPD.js";
+} from "./chunk-MMEX5KFV.js";
 import {
   ANIMATION_MODULE_TYPE,
   APP_ID,
-  BehaviorSubject,
   CSP_NONCE,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -34,36 +33,19 @@ import {
   LOCALE_ID,
   NgModule,
   NgZone,
-  Observable,
   Output,
   QueryList,
-  Subject,
-  Subscription,
   Version,
   ViewChild,
   ViewEncapsulation,
-  __spreadProps,
-  __spreadValues,
   afterNextRender,
   booleanAttribute,
-  combineLatest,
-  concat,
-  debounceTime,
-  distinctUntilChanged,
   effect,
-  filter,
   inject,
   isObservable,
   isSignal,
-  map,
-  of,
   setClassMetadata,
   signal,
-  skip,
-  startWith,
-  take,
-  takeUntil,
-  tap,
   ɵɵInputTransformsFeature,
   ɵɵNgOnChangesFeature,
   ɵɵProvidersFeature,
@@ -91,7 +73,27 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate1,
   ɵɵviewQuery
-} from "./chunk-GYRBSM7H.js";
+} from "./chunk-J6IWT6UX.js";
+import {
+  BehaviorSubject,
+  Observable,
+  Subject,
+  Subscription,
+  __spreadProps,
+  __spreadValues,
+  combineLatest,
+  concat,
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+  of,
+  skip,
+  startWith,
+  take,
+  takeUntil,
+  tap
+} from "./chunk-RLMOG32X.js";
 
 // node_modules/@angular/cdk/fesm2022/keycodes.mjs
 var TAB = 9;
@@ -5160,4 +5162,4 @@ export {
   MatRippleModule,
   MatRippleLoader
 };
-//# sourceMappingURL=chunk-5W42R43H.js.map
+//# sourceMappingURL=chunk-YIPDTG2Z.js.map

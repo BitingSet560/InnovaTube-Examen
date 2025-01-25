@@ -1,71 +1,69 @@
 <mat-toolbar color="primary">
-    <span>InnovaTube</span>
-    <span class="spacer"></span>
-    <span>{{ username }}</span>
-    <button mat-button color="warn" (click)="logout()">Cerrar Sesión</button>
-  </mat-toolbar>
-  
-  <mat-tab-group>
-    <!-- Tab para buscar videos -->
-    <mat-tab label="Buscar Videos">
-      <div class="youtube-search-container">
-        <mat-card>
-          <mat-card-title>Buscar Videos</mat-card-title>
+  <span>InnovaTube</span>
+  <span class="spacer"></span>
+  <span>{{ username }}</span>
+  <button mat-button color="warn" (click)="logout()">Cerrar Sesión</button>
+</mat-toolbar>
+
+<mat-tab-group>
+  <!-- Tab de Buscar Videos -->
+  <mat-tab label="Buscar Videos">
+    <div class="youtube-search-container">
+      <mat-card>
+        <mat-card-title>Buscar Videos</mat-card-title>
+        <mat-card-content>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Palabra clave</mat-label>
+            <input matInput [(ngModel)]="searchQuery" placeholder="Escribe algo..." />
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="searchVideos()">Buscar</button>
+        </mat-card-content>
+      </mat-card>
+
+      <div *ngIf="isLoading" class="loading">
+        <mat-spinner></mat-spinner>
+        <p>Cargando videos...</p>
+      </div>
+
+      <div *ngIf="videos.length > 0" class="video-grid">
+        <mat-card *ngFor="let video of videos" class="video-card">
+          <img mat-card-image [src]="video.thumbnail" [alt]="video.title" />
           <mat-card-content>
-            <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Palabra clave</mat-label>
-              <input matInput [(ngModel)]="searchQuery" placeholder="Escribe algo..." />
-            </mat-form-field>
-            <button mat-raised-button color="primary" (click)="searchVideos()">Buscar</button>
+            <h3>{{ video.title }}</h3>
+            <p>{{ video.description }}</p>
+            <button mat-raised-button color="primary" (click)="playVideo(video)">Reproducir</button>
+            <button mat-raised-button color="accent" (click)="addToFavorites(video)">Agregar a Favoritos</button>
           </mat-card-content>
         </mat-card>
-      
-        <div *ngIf="isLoading" class="loading">
-          <mat-spinner></mat-spinner>
-          <p>Cargando videos...</p>
-        </div>
-      
-        <div *ngIf="videos.length > 0" class="video-list">
-          <mat-card *ngFor="let video of videos" class="video-card">
-            <img mat-card-image [src]="video.thumbnail" [alt]="video.title" />
-            <mat-card-content>
-              <h3>{{ video.title }}</h3>
-              <p>{{ video.description }}</p>
-              <p><strong>Canal:</strong> {{ video.channelTitle }}</p>
-              <button mat-raised-button color="accent" (click)="addToFavorites(video)">Agregar a Favoritos</button>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      
-        <div *ngIf="!isLoading && videos.length === 0" class="no-results">
-          <p>No hay videos para mostrar. Realiza una búsqueda.</p>
-        </div>
       </div>
-    </mat-tab>
-  
-    <!-- Tab para favoritos -->
-    <mat-tab label="Favoritos">
-      <div class="favorite-list-container">
-        <mat-card>
-          <mat-card-title>Mis Videos Favoritos</mat-card-title>
+
+      <div *ngIf="!isLoading && videos.length === 0" class="no-results">
+        <p>No hay videos para mostrar. Realiza una búsqueda.</p>
+      </div>
+    </div>
+  </mat-tab>
+
+  <!-- Tab de Favoritos -->
+  <mat-tab label="Favoritos">
+    <div class="favorite-list-container">
+      <mat-card>
+        <mat-card-title>Mis Videos Favoritos</mat-card-title>
+      </mat-card>
+
+      <div *ngIf="favoriteVideos.length > 0" class="video-grid">
+        <mat-card *ngFor="let video of favoriteVideos" class="video-card">
+          <img mat-card-image [src]="video.thumbnail" [alt]="video.title" />
+          <mat-card-content>
+            <h3>{{ video.title }}</h3>
+            <button mat-raised-button color="primary" (click)="playVideo(video)">Reproducir</button>
+            <button mat-raised-button color="warn" (click)="removeFromFavorites(video)">Quitar de Favoritos</button>
+          </mat-card-content>
         </mat-card>
-  
-        <div *ngIf="favoriteVideos.length > 0" class="video-list">
-          <mat-card *ngFor="let video of favoriteVideos" class="video-card">
-            <img mat-card-image [src]="video.thumbnail" [alt]="video.title" />
-            <mat-card-content>
-              <h3>{{ video.title }}</h3>
-              <p>{{ video.description }}</p>
-              <p><strong>Canal:</strong> {{ video.channelTitle }}</p>
-              <button mat-raised-button color="warn" (click)="removeFromFavorites(video)">Quitar de Favoritos</button>
-            </mat-card-content>
-          </mat-card>
-        </div>
-  
-        <div *ngIf="favoriteVideos.length === 0" class="no-results">
-          <p>No tienes videos en tu lista de favoritos.</p>
-        </div>
       </div>
-    </mat-tab>
-  </mat-tab-group>
-  
+
+      <div *ngIf="favoriteVideos.length === 0" class="no-results">
+        <p>No tienes videos en tu lista de favoritos.</p>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

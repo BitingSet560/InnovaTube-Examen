@@ -1,10 +1,28 @@
-<mat-card>
-<mat-card-title>Bienvenido a InnovaTube</mat-card-title>
-<mat-card-content>
-  <p>Elige una opción para continuar:</p>
-  <button mat-raised-button color="primary" routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Iniciar Sesión</button>
-  <button mat-raised-button color="accent" routerLink="/sign-up" routerLinkActive="active" ariaCurrentWhenActive="page">Registrarse</button>
-</mat-card-content>
-</mat-card>
+<ng-container *ngIf="showWelcomeCard">
+  <mat-card>
+    <mat-card-title>Bienvenido a InnovaTube</mat-card-title>
+    <mat-card-content>
+      <p>Elige una opción para continuar:</p>
+      <button
+        mat-raised-button
+        color="primary"
+        routerLink="/login"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+      >
+        Iniciar Sesión
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        routerLink="/sign-up"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+      >
+        Registrarse
+      </button>
+    </mat-card-content>
+  </mat-card>
+</ng-container>
 
-<router-outlet />
+<router-outlet></router-outlet>

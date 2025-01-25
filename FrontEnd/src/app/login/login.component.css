@@ -19,3 +19,9 @@
   mat-list-avatar {
     margin-right: 20px;
   }
+
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
