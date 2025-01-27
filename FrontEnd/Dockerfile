@@ -12,4 +12,4 @@ RUN npm install -g http-server
 
 EXPOSE 8080
 
-CMD ["http-server", "dist/tu-app-angular", "-p", "8080"]
+CMD ["http-server", "dist/front-end/browser", "-p", "8080"]
