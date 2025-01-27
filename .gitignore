@@ -6,9 +6,6 @@ Thumbs.db
 # Dependencias de Node.js
 node_modules/
 
-# Archivos de entorno
-*.env
-
 # Salidas de construcción
 dist/
 build/
@@ -26,3 +23,6 @@ yarn-error.log*
 # Otros
 *.bak
 *.tmp
+
+#Angular temporales
+.angular/

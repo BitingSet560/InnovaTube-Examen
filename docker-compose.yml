@@ -1,0 +1,25 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: ./backend # Ruta a tu carpeta de backend
+    ports:
+      - "3000:3000" # Exponer el puerto del backend
+    networks:
+      - app-network
+    environment:
+      - NODE_ENV=production # Puedes agregar más variables de entorno si las necesitas
+
+  frontend:
+    build:
+      context: ./frontend # Ruta a tu carpeta de frontend
+    ports:
+      - "8080:8080" # Exponer el puerto del frontend
+    networks:
+      - app-network
+    depends_on:
+      - backend # Asegura que el frontend se inicie después del backend
+
+networks:
+  app-network:
+    driver: bridge
